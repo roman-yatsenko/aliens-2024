@@ -27,6 +27,7 @@ class AlienInvasion:
         while True:
             # Відслідковування подій клавіфатури та миші
             self._check_events()
+            self.ship.update()
             # За кожної ітерації циклу перемальовується екран
             self._update_screen()
 
@@ -36,9 +37,12 @@ class AlienInvasion:
             if event.type == pygame.QUIT:
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
+                # Переміщуємо корабель праворуч
                 if event.key == pygame.K_RIGHT:
-                    # Переміщуємо корабель праворуч
-                    self.ship.rect.x += 1
+                    self.ship.moving_right = True
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_RIGHT:
+                    self.ship.moving_right = False
 
     def _update_screen(self):
         """ "Оновлює зображення на екрані та відображає новий екран"""
