@@ -26,19 +26,21 @@ class AlienInvasion:
         while True:
             # Відслідковування подій клавіфатури та миші
             self._check_events()
-
             # За кожної ітерації циклу перемалбовується екран
-            self.screen.fill(self.settings.bg_color)
-            self.ship.blitme()
-
-            # Відображення останнього прорисованого екрану
-            pygame.display.flip()
+            self._update_screen()
 
     def _check_events(self):
         """Обробляє натиснеяння клавіш та події миші"""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
+
+    def _update_screen(self):
+        """ "Оновлює зображення на екрані та відображає новий екран"""
+        self.screen.fill(self.settings.bg_color)
+        self.ship.blitme()
+        # Відображення останнього прорисованого екрану
+        pygame.display.flip()
 
 
 if __name__ == "__main__":
