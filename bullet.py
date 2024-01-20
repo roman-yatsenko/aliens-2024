@@ -20,3 +20,12 @@ class Bullet(Sprite):
 
         # Позиція снаряду зберішається у float
         self.y = float(self.rect.y)
+
+    def update(self):
+        """Переміщує снаряд угору по екрану"""
+        self.y -= self.settings.bullet_speed
+        self.rect.y = self.y
+
+    def draw_bullet(self):
+        """Виводе снаряд на екран"""
+        pygame.draw.rect(self.screen, self.color, self.rect)
