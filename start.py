@@ -20,6 +20,7 @@ class AlienInvasion:
         pygame.display.set_caption("Alien Invasion")
 
         self.ship = Ship(self)
+        self.bullets = pygame.sprite.Group()
 
     def run_game(self):
         """Запуск основного циклу гри"""
@@ -27,6 +28,7 @@ class AlienInvasion:
             # Відслідковування подій клавіфатури та миші
             self._check_events()
             self.ship.update()
+            self.bullets.update()
             # За кожної ітерації циклу перемальовується екран
             self._update_screen()
 
