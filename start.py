@@ -34,6 +34,7 @@ class AlienInvasion:
             self._check_events()
             self.ship.update()
             self._update_bullets()
+            self._update_aliens()
 
             # За кожної ітерації циклу перемальовується екран
             self._update_screen()
@@ -101,6 +102,10 @@ class AlienInvasion:
         if len(self.bullets) < self.settings.bulets_allowed:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
+
+    def _update_aliens(self):
+        """Оновлює позиції всіх прибульців флоту"""
+        self.aliens.update()
 
     def _update_bullets(self):
         """Оновлює позиції снарядів"""
