@@ -5,6 +5,7 @@ import pygame
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
+from alien import Alien
 
 
 class AlienInvasion:
@@ -22,6 +23,9 @@ class AlienInvasion:
 
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
+        self.aliens = pygame.sprite.Group()
+
+        self._create_fleet()
 
     def run_game(self):
         """Запуск основного циклу гри"""
@@ -33,15 +37,6 @@ class AlienInvasion:
 
             # За кожної ітерації циклу перемальовується екран
             self._update_screen()
-
-    def _update_bullets(self):
-        """Оновлює позиції снарядів"""
-        self.bullets.update()
-
-        # Видалення снарядів, що вилетіли за край екрану
-        for bullet in self.bullets.copy():
-            if bullet.rect.bottom <= 0:
-                self.bullets.remove(bullet)
 
     def _check_events(self):
         """Обробляє натиснеяння клавіш та події миші"""
@@ -71,11 +66,26 @@ class AlienInvasion:
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
 
+    def _create_fleet(self):
+        """Створення флоту прибульців"""
+        # Створення прибульця
+        alien = Alien(self)
+        self.aliens.add(alien)
+
     def _fire_bullet(self):
         """Створює новий снаряд та додає його до групи bullets"""
         if len(self.bullets) < self.settings.bulets_allowed:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
+
+    def _update_bullets(self):
+        """Оновлює позиції снарядів"""
+        self.bullets.update()
+
+        # Видалення снарядів, що вилетіли за край екрану
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
 
     def _update_screen(self):
         """Оновлює зображення на екрані та відображає новий екран"""
@@ -83,6 +93,8 @@ class AlienInvasion:
         self.ship.blitme()
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
+        self.aliens.draw(self.screen)
+
         # Відображення останнього прорисованого екрану
         pygame.display.flip()
 
