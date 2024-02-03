@@ -130,6 +130,9 @@ class AlienInvasion:
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
 
+        # Перевірка потраплянь у прибульців
+        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+
     def _update_screen(self):
         """Оновлює зображення на екрані та відображає новий екран"""
         self.screen.fill(self.settings.bg_color)
