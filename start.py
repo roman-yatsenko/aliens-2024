@@ -133,6 +133,11 @@ class AlienInvasion:
         # Перевірка потраплянь у прибульців
         collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
 
+        if not self.aliens:
+            # Знищення існуючих снарядів та створення нового флоту
+            self.bullets.empty()
+            self._create_fleet()
+
     def _update_screen(self):
         """Оновлює зображення на екрані та відображає новий екран"""
         self.screen.fill(self.settings.bg_color)
