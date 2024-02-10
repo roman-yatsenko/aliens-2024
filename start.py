@@ -64,6 +64,17 @@ class AlienInvasion:
                 self._ship_hit()
                 break
 
+    def _check_bullet_alien_collisions(self):
+        """Обробка колазій снарядів з прибульцями"""
+        # Перевірка потраплянь у прибульців
+        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+
+        if not self.aliens:
+            # Знищення існуючих снарядів та створення нового флоту
+            self.bullets.empty()
+            self._create_fleet()
+            self.settings.increase_speed()
+
     def _check_events(self):
         """Обробляє натиснеяння клавіш та події миші"""
         for event in pygame.event.get():
@@ -199,16 +210,6 @@ class AlienInvasion:
                 self.bullets.remove(bullet)
 
         self._check_bullet_alien_collisions()
-
-    def _check_bullet_alien_collisions(self):
-        """Обробка колазій снарядів з прибульцями"""
-        # Перевірка потраплянь у прибульців
-        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
-
-        if not self.aliens:
-            # Знищення існуючих снарядів та створення нового флоту
-            self.bullets.empty()
-            self._create_fleet()
 
     def _update_screen(self):
         """Оновлює зображення на екрані та відображає новий екран"""
