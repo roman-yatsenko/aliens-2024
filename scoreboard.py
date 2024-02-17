@@ -16,13 +16,13 @@ class Scoreboard:
         self.font = pygame.font.SysFont(None, 48)
 
         # Підготовка зображення
-        self._prepare_score()
+        self.prepare_score()
 
     def show_score(self):
         """Виводе рахунок на екран"""
         self.screen.blit(self.score_image, self.score_rect)
 
-    def _prepare_score(self):
+    def prepare_score(self):
         """Перетворює поточний рахунок на графічне зображення"""
         score_str = str(self.stats.score)
         self.score_image = self.font.render(
