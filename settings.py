@@ -21,7 +21,7 @@ class Settings:
         self.fleet_drop_speed = 10
 
         # Темпи прискорення гри
-        self.speedup_scale = 2
+        self.speedup_scale = 1.1
 
         self.initialyze_dynamic_settings()
 
