@@ -42,6 +42,7 @@ class AlienInvasion:
 
         # Створення кнопки Play
         self.play_button = Button(self, "Play")
+        self.pause_button = Button(self, "Pause")
 
     def run_game(self):
         """Запуск основного циклу гри"""
@@ -257,6 +258,8 @@ class AlienInvasion:
         # Кнопка Play відображається в тому випадку, коли гра неактивна
         if not self.stats.game_active:
             self.play_button.draw_button()
+        elif self.stats.game_paused:
+            self.pause_button.draw_button()
 
         # Відображення останнього прорисованого екрану
         pygame.display.flip()
