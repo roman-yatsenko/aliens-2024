@@ -49,7 +49,7 @@ class AlienInvasion:
             # Відслідковування подій клавіфатури та миші
             self._check_events()
 
-            if self.stats.game_active:
+            if self.stats.game_active and not self.stats.game_paused:
                 self.ship.update()
                 self._update_bullets()
                 self._update_aliens()
@@ -120,11 +120,13 @@ class AlienInvasion:
             self.ship.moving_left = True
         elif event.key in (pygame.K_q, pygame.K_ESCAPE):
             sys.exit()
-        elif event.key == pygame.K_SPACE:
+        elif event.key == pygame.K_SPACE and not self.stats.game_paused:
             self._fire_bullet()
         elif event.key == pygame.K_p:
             if not self.stats.game_active:
                 self._start_new_game()
+            else:
+                self.stats.game_paused = not self.stats.game_paused
 
     def _check_keyup_events(self, event):
         """Реагує на відпускання клавіш"""
